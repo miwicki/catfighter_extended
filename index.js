@@ -9,6 +9,6 @@ if (localStorage.getItem('fightData') !== null){
   characterMenu.addEventListener('click', characterHandler);
   function characterHandler(event){
     fightData.push(event.target.alt);
+    localStorage.setItem('fightData', JSON.stringify(fightData));
   }
-  localStorage.setItem(name, fightData);
 }
