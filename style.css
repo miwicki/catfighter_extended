@@ -10,6 +10,10 @@ body h1 {
   margin: 30px;
 }
 
+body h2 {
+  font-size: 30px;
+}
+
 header {
   background-color: red;
   height: 80px;
@@ -22,6 +26,31 @@ main {
 
 img {
   padding: 0;
+}
+
+section {
+  margin: 5% 0% 0% 25%;
+  display: inline-block;
+}
+
+table tr td {
+  padding: 10px;
+}
+
+a
+{
+  text-decoration: none;
+  color: #232323;
+  transition: color 0.3s ease;
+}
+
+a:hover
+{
+  color: tomato;
+}
+
+#leaderboard {
+  margin: 5% 0% 10% 45%;
 }
 
 #character-menu ul li {
@@ -51,21 +80,13 @@ img {
 }
 
 #secret-menu {
-  /*display: none;*/
   margin-top: 80px;
   margin-left: 9%;
 }
 
-a
-{
-  text-decoration: none;
-  color: #232323;
-  transition: color 0.3s ease;
-}
-
-a:hover
-{
-  color: tomato;
+#about ul {
+  display: inline-block;
+  list-style: none;
 }
 
 #menuToggle
