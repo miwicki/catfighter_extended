@@ -1,8 +1,44 @@
 body {
   border: 1px solid red;
   font-family: 'VT323', serif;
+  color: white;
+  background-color: black;
+}
+
+body h1 {
+  font-size: 40px;
+  text-align: center;
+  margin: 30px;
+}
+
+body ul li {
+  display: inline-block;
 }
 
 body ul {
-  display: inline-block;
+  margin-left: 20%;
+}
+
+header {
+  background-color: red;
+  height: 80px;
+}
+
+main {
+  background-image: url('images/map.png');
+  width: auto;
+}
+
+#logo {
+  margin-top: 10px;
+  margin-left: 42%;
+}
+
+#character-menu {
+  margin-top: 90px;
+}
+
+#secret-menu {
+  margin-top: 80px;
+  margin-left: 9%;
 }
