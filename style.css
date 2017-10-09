@@ -1,0 +1,8 @@
+body {
+  border: 1px solid red;
+  font-family: 'VT323', serif;
+}
+
+body ul {
+  display: inline-block;
+}
