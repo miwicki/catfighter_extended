@@ -1,14 +1,14 @@
 'use strict';
+var fightData = [];
+var characterMenu = document.getElementById('roster');
 if (localStorage.getItem('fightData') !== null){
-  console.log('Data found');
+  console.log('Local Storage NOT Cleared');
   localStorage.clear();
 } else {
-  console.log('Data not found');
-  var fightData = [];
-  var characterMenu = document.getElementById('roster');
+  console.log('Local Storage Cleared');
   characterMenu.addEventListener('click', characterHandler);
-  function characterHandler (){
-    fightData.push(event.target);
-    localStorage.setItem(name, fightData);
+  function characterHandler(event){
+    fightData.push(event.target.alt);
   }
+  localStorage.setItem(name, fightData);
 }
