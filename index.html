@@ -8,25 +8,41 @@
 </head>
 <body>
   <header>
-      <button id="logo"><img src="http://placehold.it/200x50"></button> <!-- Logo -->
+    <nav role="navigation">
+      <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        <ul id="menu">
+          <li>Fight</li>
+          <a href="leaderboard.html"><li>Leaderboard</li></a>
+          <a href="about.html"><li>About Us</li></a>
+        </ul>
+      </div>
+      <button id="logo"><img src="http://placehold.it/200x50"></button>
+
+    </nav>
   </header>
   <main>
     <h1>CHARACTER SELECT</h1>
-    <div id="character-menu">
-      <ul>
-        <li><button id="catOne"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 1 -->
-        <li><button id="catTwo"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 2 -->
-        <li><button id="catThree"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 3 -->
-        <li><button id="catFour"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 4 -->
-      </ul>
-    </div>
-    <div id="secret-menu">
-      <ul>
-        <li><button id="demi"><img src="http://placehold.it/200x200"></button></li> <!-- Demi -->
-        <li><button id="gary"><img src="http://placehold.it/200x200"></button></li> <!-- Gary -->
-        <li><button id="charlotte"><img src="http://placehold.it/200x200"></button></li> <!-- Charlotte -->
-      </ul>
-    </div>
+    <section id="roster">
+      <div id="character-menu">
+        <ul>
+          <li><button id="catOne"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 1 -->
+          <li><button id="catTwo"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 2 -->
+          <li><button id="catThree"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 3 -->
+          <li><button id="catFour"><img src="http://placehold.it/200x200"></button></li> <!-- Cat 4 -->
+        </ul>
+      </div>
+      <div id="secret-menu">
+        <ul>
+          <li><button id="demi"><img src="http://placehold.it/200x200"></button></li> <!-- Demi -->
+          <li><button id="gary"><img src="http://placehold.it/200x200"></button></li> <!-- Gary -->
+          <li><button id="charlotte"><img src="http://placehold.it/200x200"></button></li> <!-- Charlotte -->
+        </ul>
+      </div>
+    </section>
     <script src="index.js"></script>
   </body>
   </html>
