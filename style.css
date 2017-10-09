@@ -28,11 +28,6 @@ img {
   padding: 0;
 }
 
-section {
-  margin: 5% 0% 0% 25%;
-  display: inline-block;
-}
-
 table tr td {
   padding: 10px;
 }
@@ -49,8 +44,26 @@ a:hover
   color: tomato;
 }
 
+.fighter {
+  display: inline-block;
+  margin: 5% 0% 0% 25%;
+}
+
 #leaderboard {
+  font-size: 30px;
+  margin-left: 40%;
+}
+
+#leaderboard tr td {
+  padding: 10px 30px;
+}
+
+#miniLeaderboard {
   margin: 5% 0% 10% 45%;
+}
+
+#fight ul {
+  display: inline-block;
 }
 
 #character-menu ul li {
