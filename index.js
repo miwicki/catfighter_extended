@@ -1,14 +1,16 @@
 'use strict';
 var fightData = [];
 var characterMenu = document.getElementById('roster');
-if (localStorage.getItem('fightData') !== null){
-  console.log('Local Storage NOT Cleared');
-  localStorage.clear();
-} else {
-  console.log('Local Storage Cleared');
-  characterMenu.addEventListener('click', characterHandler);
-  function characterHandler(event){
+
+localStorage.setItem('fightData', JSON.stringify(fightData));
+
+characterMenu.addEventListener('click', characterHandler);
+
+function characterHandler(event){
+  if (fightData.length < 2) {
     fightData.push(event.target.alt);
+  } else {
     localStorage.setItem('fightData', JSON.stringify(fightData));
+    window.location.href = 'fight.html';
   }
 }
