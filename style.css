@@ -48,6 +48,14 @@ a:hover
   display: inline-block;
   margin: 5% 0% 0% 25%;
 }
+#playerOneSec img {
+  height: 200px;
+  width: 200px;
+}
+#playerTwoSec img {
+  height: 200px;
+  width: 200px;
+}
 #roster img {
   height: 200px;
   width: 200px;

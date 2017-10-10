@@ -11,6 +11,8 @@ var leaderboard = [];
 var score = 1000;
 var endScreen = document.getElementById('endScreen');
 var userForm = document.getElementById('userForm');
+var fighterOne = document.getElementById('PlayerOne');
+var fighterTwo = document.getElementById('PlayerTwo');
 endScreen.style.visibility = 'hidden';
 
 pOneTurn();
@@ -48,7 +50,6 @@ function Fighter(name, filepath) {
   this.health = 100;
   allCats.push(this);
 }
-
 //User constructor function
 function User(username, score) {
   this.username = username;
@@ -75,6 +76,9 @@ for (var i in allCats){
     playerTwo = allCats[i];
   }
 }
+
+fighterOne.src = playerOne.filepath;
+fighterTwo.src = playerTwo.filepath;
 //function dedicated to the heal
 function heal() {
   var randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
