@@ -91,7 +91,7 @@ function attackOne() {
 function leaderboardHandler (event) {
   event.preventDefault();
   var user = event.target.submitUser.value;
-  new User(user);
+  new User(user, score);
   localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
   window.location.href = 'leaderboard.html';
 }
