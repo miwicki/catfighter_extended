@@ -9,6 +9,9 @@ var playerOne = [];
 var playerTwo = [];
 var leaderboard = [];
 var score = 1000;
+var endScreen = document.getElementById('endScreen');
+var userForm = document.getElementById('userForm');
+endScreen.style.visibility = 'hidden';
 
 pOneTurn();
 //Trying to get turns to work
@@ -33,6 +36,11 @@ if (fightData === null || fightData.length < 2) {
   window.location.href = 'index.html';
 }
 
+if (localStorage.getItem('leaderboard') !== null) {
+  console.log('Data found');
+  leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
+}
+
 //Character construction function
 function Fighter(name, filepath) {
   this.name = name;
@@ -44,6 +52,7 @@ function Fighter(name, filepath) {
 //User constructor function
 function User(username) {
   this.username = username;
+  this.score = score;
   leaderboard.push(this);
 }
 
@@ -71,17 +80,31 @@ function heal() {
 
 //function dedicated to the attack
 function attackOne() {
-  var randomAttack = Math.floor(Math.random() * (20 - 0 + 1) + 0);
+  var randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
   return randomAttack;
 };
 
+function leaderboardHandler (event) {
+  event.preventDefault();
+  var user = event.target.submitUser.value;
+  new User(user);
+  localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+  window.location.href = 'leaderboard.html';
+}
+
+function addUser() {
+  endScreen.style.visibility = 'visible';
+}
+
 //listener to listen for which move to call
 //Event handler for attack and heal for each player based on button click
+//Listener for username submit
 playerOneAtt.addEventListener('click', pOneAttHandler);
 playerOneDef.addEventListener('click', pOneDefHandler);
 playerTwoAtt.addEventListener('click', pTwoAttHandler);
 playerTwoDef.addEventListener('click', pTwoDefHandler);
+userForm.addEventListener('submit', leaderboardHandler);
 // playerTwoSec.addEventListener('click', fightHandler);
 
 function pOneAttHandler() {
@@ -90,7 +113,12 @@ function pOneAttHandler() {
   score = score + pOneAttack;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
-  pTwoTurn();
+  if (playerTwo.health <= 0) {
+    console.log('Below Zero Triggered');
+    addUser();
+  } else {
+    pTwoTurn();
+  }
 }
 function pOneDefHandler() {
   var pOneDefence = heal();
@@ -106,7 +134,12 @@ function pTwoAttHandler() {
   score = score + pTwoAttack;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
-  pOneTurn();
+  if (playerOne.health <= 0) {
+    console.log('Below Zero Triggered');
+    addUser();
+  } else {
+    pOneTurn();
+  }
 }
 function pTwoDefHandler() {
   var pTwoDefence = heal();
@@ -117,7 +150,7 @@ function pTwoDefHandler() {
   pOneTurn();
 }
 
-
+//Function grabbing user data and pushing to leaderboard array
 //function to to win/lose screen
 //function to hide other player's buttons
 //once victor has won, enter in username and redirect that information to leaderboard
