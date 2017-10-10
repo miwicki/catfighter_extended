@@ -7,6 +7,22 @@ var playerTwoDef = document.getElementById('pTwoDef');
 var allCats = [];
 var playerOne = [];
 var playerTwo = [];
+pOneTurn();
+//Trying to get turns to work
+function pOneTurn(){
+  document.getElementById('pOneAtt').style.visibility = 'visible';
+  document.getElementById('pOneDef').style.visibility = 'visible';
+  document.getElementById('pTwoAtt').style.visibility = 'hidden';
+  document.getElementById('pTwoDef').style.visibility = 'hidden';
+}
+
+function pTwoTurn(){
+  document.getElementById('pOneAtt').style.visibility = 'hidden';
+  document.getElementById('pOneDef').style.visibility = 'hidden';
+  document.getElementById('pTwoAtt').style.visibility = 'visible';
+  document.getElementById('pTwoDef').style.visibility = 'visible';
+}
+
 fightData = JSON.parse(localStorage.getItem('fightData'));
 
 //load localStorage
@@ -63,21 +79,25 @@ function pOneAttHandler() {
   playerTwo.health -= attackOne();
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pTwoTurn();
 }
 function pOneDefHandler() {
   playerOne.health += heal();
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pTwoTurn();
 }
 function pTwoAttHandler() {
   playerOne.health -= attackOne();
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pOneTurn();
 }
 function pTwoDefHandler() {
   playerTwo.health += heal();
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pOneTurn();
 }
 
 
