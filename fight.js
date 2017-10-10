@@ -7,6 +7,9 @@ var playerTwoDef = document.getElementById('pTwoDef');
 var allCats = [];
 var playerOne = [];
 var playerTwo = [];
+var leaderboard = [];
+var score = 1000;
+
 pOneTurn();
 //Trying to get turns to work
 function pOneTurn(){
@@ -22,7 +25,6 @@ function pTwoTurn(){
   document.getElementById('pTwoAtt').style.visibility = 'visible';
   document.getElementById('pTwoDef').style.visibility = 'visible';
 }
-
 fightData = JSON.parse(localStorage.getItem('fightData'));
 
 //load localStorage
@@ -37,6 +39,12 @@ function Fighter(name, filepath) {
   this.filepath = filepath;
   this.health = 100;
   allCats.push(this);
+}
+
+//User constructor function
+function User(username) {
+  this.username = username;
+  leaderboard.push(this);
 }
 
 //all cats being instanced
@@ -64,6 +72,7 @@ function heal() {
 //function dedicated to the attack
 function attackOne() {
   var randomAttack = Math.floor(Math.random() * (20 - 0 + 1) + 0);
+  score = score + randomAttack;
   return randomAttack;
 };
 
@@ -76,25 +85,33 @@ playerTwoDef.addEventListener('click', pTwoDefHandler);
 // playerTwoSec.addEventListener('click', fightHandler);
 
 function pOneAttHandler() {
-  playerTwo.health -= attackOne();
+  var pOneAttack = attackOne();
+  playerTwo.health -= pOneAttack;
+  score = score + pOneAttack;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
   pTwoTurn();
 }
 function pOneDefHandler() {
-  playerOne.health += heal();
+  var pOneDefence = heal();
+  playerOne.health += pOneDefence;
+  score = score - pOneDefence;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
   pTwoTurn();
 }
 function pTwoAttHandler() {
-  playerOne.health -= attackOne();
+  var pTwoAttack = attackOne();
+  playerOne.health -= pTwoAttack;
+  score = score + pTwoAttack;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
   pOneTurn();
 }
 function pTwoDefHandler() {
-  playerTwo.health += heal();
+  var pTwoDefence = heal();
+  playerTwo.health += pTwoDefence;
+  score = score - pOneDefence;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
   pOneTurn();
