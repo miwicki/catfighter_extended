@@ -51,7 +51,7 @@ new function attackOne () {
 };
 
 //listener to listen for which move to call
-//Event handler for attack and heal for each player based on button click 
+//Event handler for attack and heal for each player based on button click
 fighter.addEventListener('click', fightHandler);
 
 function fightHandler(event) {
