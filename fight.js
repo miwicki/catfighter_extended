@@ -111,7 +111,7 @@ function pTwoAttHandler() {
 function pTwoDefHandler() {
   var pTwoDefence = heal();
   playerTwo.health += pTwoDefence;
-  score = score - pOneDefence;
+  score = score - pTwoDefence;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
   pOneTurn();
