@@ -206,3 +206,8 @@ a:hover
 {
   transform: none;
 }
+
+button
+{
+  border: 3px solid yellow;
+}
