@@ -1,6 +1,6 @@
 'use strict';
 var fightData = [];
-var fighter = document.getElementByClassName('fighter');
+/*var fighter = document.getElementByClassName('fighter');*/
 var allCats = [];
 var playerOne = [];
 var playerTwo = [];
@@ -25,6 +25,9 @@ new Fighter('Cute-Cat', 'images/kitty1.jpg');
 new Fighter('Grumpy-Cat', 'images/GrumpyCat.jpg');
 new Fighter('Spookie','images/spookie.jpg');
 new Fighter('Nova','images/nova.jpg');
+new Fighter('Gary', 'images/gary.jpg');
+new Fighter('Charlotte', 'images/charlotte.jpg');
+new Fighter('Demi', 'images/demi.png');
 for (var i in allCats){
   if (fightData[0] === allCats[i].name){
     playerOne = allCats[i];
@@ -33,21 +36,14 @@ for (var i in allCats){
     playerTwo = allCats[i];
   }
 }
-//random function that takes in min and max
-
-
 //function dedicated to the heal
 new function heal () {
-  var randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
-  Fighter.health = Fighter.health + randomHeal;
-  console.log(Fighter.health);
+  return Math.floor(Math.random() * (12 - 2) + 3);
 };
 
 //function dedicated to the attack
 new function attackOne () {
-  var randomAttack = Math.floor(Math.random() * (20 - 0 + 1) + 0);
-  Fighter.health = Fighter.health - randomAttack;
-  console.log(Fighter.health);
+  return Math.floor(Math.random() * (20 - 0 + 1) + 0);
 };
 
 //listener to listen for which move to call
