@@ -1,6 +1,9 @@
 'use strict';
 var fightData = [];
-/*var fighter = document.getElementByClassName('fighter');*/
+var playerOneAtt = document.getElementById('pOneAtt');
+var playerOneDef = document.getElementById('pOneDef');
+var playerTwoAtt = document.getElementById('pTwoAtt');
+var playerTwoDef = document.getElementById('pTwoDef');
 var allCats = [];
 var playerOne = [];
 var playerTwo = [];
@@ -37,33 +40,46 @@ for (var i in allCats){
   }
 }
 //function dedicated to the heal
-new function heal () {
-  return Math.floor(Math.random() * (12 - 2) + 3);
+function heal() {
+  var randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
+  return randomHeal;
 };
 
 //function dedicated to the attack
-new function attackOne () {
-  return Math.floor(Math.random() * (20 - 0 + 1) + 0);
+function attackOne() {
+  var randomAttack = Math.floor(Math.random() * (20 - 0 + 1) + 0);
+  return randomAttack;
 };
 
 //listener to listen for which move to call
 //Event handler for attack and heal for each player based on button click
-fighter.addEventListener('click', fightHandler);
+playerOneAtt.addEventListener('click', pOneAttHandler);
+playerOneDef.addEventListener('click', pOneDefHandler);
+playerTwoAtt.addEventListener('click', pTwoAttHandler);
+playerTwoDef.addEventListener('click', pTwoDefHandler);
+// playerTwoSec.addEventListener('click', fightHandler);
 
-function fightHandler(event) {
-  if(event.target.id = 'pOneAtt'){
-    playerTwo[0].health -= attackOne();
-  }
-  if(event.target.id = 'pOneDef'){
-    playerOne[0].health += heal();
-  }
-  if(event.target.id = 'pTwoAtt'){
-    playerOne[0].health -= attackOne();
-  }
-  if(event.target.id = 'pTwoDef'){
-    playerTwo[0].health += heal();
-  }
+function pOneAttHandler() {
+  playerTwo.health -= attackOne();
+  console.log('Player one health: ' + playerOne.health);
+  console.log('Player two health: ' + playerTwo.health);
 }
+function pOneDefHandler() {
+  playerOne.health += heal();
+  console.log('Player one health: ' + playerOne.health);
+  console.log('Player two health: ' + playerTwo.health);
+}
+function pTwoAttHandler() {
+  playerOne.health -= attackOne();
+  console.log('Player one health: ' + playerOne.health);
+  console.log('Player two health: ' + playerTwo.health);
+}
+function pTwoDefHandler() {
+  playerTwo.health += heal();
+  console.log('Player one health: ' + playerOne.health);
+  console.log('Player two health: ' + playerTwo.health);
+}
+
 
 //function to to win/lose screen
 //function to hide other player's buttons
