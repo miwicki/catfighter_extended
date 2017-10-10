@@ -50,11 +50,14 @@ function Fighter(name, filepath) {
 }
 
 //User constructor function
-function User(username) {
+function User(username, score) {
   this.username = username;
   this.score = score;
   leaderboard.push(this);
 }
+
+new User('Will','9999');
+new User('Kat','700');
 
 //all cats being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
