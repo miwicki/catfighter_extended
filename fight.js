@@ -9,6 +9,22 @@ var playerOne = [];
 var playerTwo = [];
 var leaderboard = [];
 var score = 1000;
+
+pOneTurn();
+//Trying to get turns to work
+function pOneTurn(){
+  document.getElementById('pOneAtt').style.visibility = 'visible';
+  document.getElementById('pOneDef').style.visibility = 'visible';
+  document.getElementById('pTwoAtt').style.visibility = 'hidden';
+  document.getElementById('pTwoDef').style.visibility = 'hidden';
+}
+
+function pTwoTurn(){
+  document.getElementById('pOneAtt').style.visibility = 'hidden';
+  document.getElementById('pOneDef').style.visibility = 'hidden';
+  document.getElementById('pTwoAtt').style.visibility = 'visible';
+  document.getElementById('pTwoDef').style.visibility = 'visible';
+}
 fightData = JSON.parse(localStorage.getItem('fightData'));
 
 //load localStorage
@@ -74,6 +90,7 @@ function pOneAttHandler() {
   score = score + pOneAttack;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pTwoTurn();
 }
 function pOneDefHandler() {
   var pOneDefence = heal();
@@ -81,6 +98,7 @@ function pOneDefHandler() {
   score = score - pOneDefence;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pTwoTurn();
 }
 function pTwoAttHandler() {
   var pTwoAttack = attackOne();
@@ -88,6 +106,7 @@ function pTwoAttHandler() {
   score = score + pTwoAttack;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pOneTurn();
 }
 function pTwoDefHandler() {
   var pTwoDefence = heal();
@@ -95,6 +114,7 @@ function pTwoDefHandler() {
   score = score - pOneDefence;
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
+  pOneTurn();
 }
 
 
