@@ -36,6 +36,11 @@ if (fightData === null || fightData.length < 2) {
   window.location.href = 'index.html';
 }
 
+if (localStorage.getItem('leaderboard') !== null) {
+  console.log('Data found');
+  leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
+}
+
 //Character construction function
 function Fighter(name, filepath) {
   this.name = name;
