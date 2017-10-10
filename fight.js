@@ -1,8 +1,10 @@
 'use strict';
 var fightData = [];
-// var playerOneSec = document.getElementById('playerOneSec');
-// var playerTwoSec = document.getElementById('playerTwoSec');
+
 var playerOneAtt = document.getElementById('pOneAtt');
+var playerOneDef = document.getElementById('pOneDef');
+var playerTwoAtt = document.getElementById('pTwoAtt');
+var playerTwoDef = document.getElementById('pTwoDef');
 var allCats = [];
 var playerOne = [];
 var playerTwo = [];
@@ -53,24 +55,31 @@ function attackOne() {
 //listener to listen for which move to call
 //Event handler for attack and heal for each player based on button click
 playerOneAtt.addEventListener('click', pOneAttHandler);
+playerOneDef.addEventListener('click', pOneDefHandler);
+playerTwoAtt.addEventListener('click', pTwoAttHandler);
+playerTwoDef.addEventListener('click', pTwoDefHandler);
 // playerTwoSec.addEventListener('click', fightHandler);
 
-function pOneAttHandler(event) {
-  if(event.target.alt = 'pOneAtt'){
-    playerTwo.health -= attackOne();
-  }
+function pOneAttHandler() {
+  playerTwo.health -= attackOne();
   console.log('Player one health: ' + playerOne.health);
   console.log('Player two health: ' + playerTwo.health);
 }
-// if(event.target.alt = 'pOneDef'){
-//   playerOne.health += heal();
-// }
-// if(event.target.alt = 'pTwoAtt'){
-//   playerOne.health -= attackOne();
-// }
-// if(event.target.alt = 'pTwoDef'){
-//   playerTwo.health += heal();
-// }
+function pOneDefHandler() {
+  playerOne.health += heal();
+  console.log('Player one health: ' + playerOne.health);
+  console.log('Player two health: ' + playerTwo.health);
+}
+function pTwoAttHandler() {
+  playerOne.health -= attackOne();
+  console.log('Player one health: ' + playerOne.health);
+  console.log('Player two health: ' + playerTwo.health);
+}
+function pTwoDefHandler() {
+  playerTwo.health += heal();
+  console.log('Player one health: ' + playerOne.health);
+  console.log('Player two health: ' + playerTwo.health);
+}
 
 
 //function to to win/lose screen
