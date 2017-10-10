@@ -1,6 +1,5 @@
 'use strict';
 var fightData = [];
-
 var playerOneAtt = document.getElementById('pOneAtt');
 var playerOneDef = document.getElementById('pOneDef');
 var playerTwoAtt = document.getElementById('pTwoAtt');
@@ -29,6 +28,9 @@ new Fighter('Cute-Cat', 'images/kitty1.jpg');
 new Fighter('Grumpy-Cat', 'images/GrumpyCat.jpg');
 new Fighter('Spookie','images/spookie.jpg');
 new Fighter('Nova','images/nova.jpg');
+new Fighter('Gary', 'images/gary.jpg');
+new Fighter('Charlotte', 'images/charlotte.jpg');
+new Fighter('Demi', 'images/demi.png');
 for (var i in allCats){
   if (fightData[0] === allCats[i].name){
     playerOne = allCats[i];
@@ -37,9 +39,6 @@ for (var i in allCats){
     playerTwo = allCats[i];
   }
 }
-//random function that takes in min and max
-
-
 //function dedicated to the heal
 function heal() {
   var randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
