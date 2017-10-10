@@ -9,10 +9,17 @@ if (fightData === null || fightData.length < 2) {
 }
 
 //Character construction function
-
+function Fighter(name, filepath) {
+  this.name = name;
+  this.filepath = filepath;
+  this.health = 100;
+}
 
 //all cats being instanced
-
+new Fighter('Cute Cat', 'images/kitty1.jpg');
+new Fighter('Grumpy Cat', 'images/GrumpyCat.jpg');
+new Fighter('Spookie','images/spookie.jpg');
+new Fighter('Nova','images/nova.jpg');
 
 //random function that takes in min and max
 
