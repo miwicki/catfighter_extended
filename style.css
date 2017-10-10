@@ -49,6 +49,15 @@ a:hover
   margin: 5% 0% 0% 25%;
 }
 
+#endScreen {
+  margin-top: 80px;
+}
+
+#endScreen form {
+  margin-left: 39%;
+  font-size: 30px;
+}
+
 #leaderboard {
   font-size: 30px;
   margin-left: 40%;
