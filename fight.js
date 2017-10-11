@@ -104,6 +104,15 @@ function addUser() {
   endScreen.style.visibility = 'visible';
 }
 
+//Functions to handle sound effects
+function attackSound () {
+  document.getElementById('attack').play();
+}
+
+function healSound () {
+  document.getElementById('heal').play();
+}
+
 //Event Handlers for character attacks, heals, and HP display updates
 
 function pOneAttHandler() {
@@ -113,6 +122,7 @@ function pOneAttHandler() {
   console.log(randomAttack);
   playerTwo.health = playerTwo.health - randomAttack;
   document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
+  attackSound();
   if (playerTwo.health <= 0) {
     console.log('Below Zero Triggered');
     addUser();
@@ -126,6 +136,7 @@ function pOneDefHandler() {
   randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').innerHTML = playerOne.health;
+  healSound();
   pTwoTurn();
 }
 
@@ -136,6 +147,7 @@ function pTwoAttHandler() {
   console.log(randomAttack);
   playerOne.health = playerOne.health - randomAttack;
   document.getElementById('playerOneHP').innerHTML = playerOne.health;
+  attackSound();
   if (playerOne.health <= 0) {
     addUser();
   } else {
@@ -149,6 +161,7 @@ function pTwoDefHandler() {
   score = score - randomHeal;
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
+  healSound();
   pOneTurn();
 }
 
