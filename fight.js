@@ -16,6 +16,12 @@ var userForm = document.getElementById('userForm');
 var fighterOne = document.getElementById('PlayerOne');
 var fighterTwo = document.getElementById('PlayerTwo');
 var audio = document.getElementById('theme');
+var animation = document.querySelector('canvas');
+var context = animation.getContext('2d');
+context.imageSmoothingEnabled = false;
+var mySpriteSheet = document.getElementById('healSprite');
+var x;
+var y;
 
 //Making the game over screen invisible
 endScreen.style.visibility = 'hidden';
@@ -53,12 +59,52 @@ function Fighter(name, filepath) {
   allCats.push(this);
 }
 
+function Sprite(model){
+  this.image = model.image;
+  this.frames = model.frames;
+  this.ticksPerFrame = model.ticksPerFrame;
+  this.width = this.image.width;
+  this.height = this.image.height;
+  this.frameH = this.height / model.frames;
+  this.frameIndex = 0;
+  this.tickCount = 0;
+}
+Sprite.prototype.update = function(x, y){
+  this.tickCount += 1;
+  if(this.tickCount > this.ticksPerFrame){
+    this.tickCount = 0;
+    if(this.frameIndex < this.frames - 1){
+      this.frames += 1;
+    }else{
+      this.frameIndex = 0;
+    }
+  }
+  context.drawImage(
+    this.image,
+    0,
+    this.frameIndex * this.frameH,
+    this.width,
+    this.frameH,
+    x,
+    y,
+    this.width,
+    this.frameH
+  );
+};
 function User(username, score) {
   this.username = username;
   this.score = score;
   leaderboard.push(this);
 }
-
+var healthAnimation = new Sprite({
+  image: mySpriteSheet,
+  frames: 5,
+  ticksPerFrame: 10
+});
+function render (){
+  context.clearRect(0,0,32,160);
+  healthAnimation.update(0, 0);
+}
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
 new Fighter('Grumpy-Cat', 'images/GrumpyCat.jpg');
@@ -162,6 +208,7 @@ function pOneDefHandler() {
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
+  render();
   pTwoTurn();
 }
 
@@ -198,6 +245,7 @@ function pTwoDefHandler() {
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   healSound();
+  render();
   pOneTurn();
 }
 
