@@ -8,13 +8,15 @@ body {
 }
 
 body h1 {
-  font-size: 40px;
+  font-size: 50px;
   text-align: center;
   margin: 30px;
 }
 
 body h2 {
-  font-size: 30px;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 header {
@@ -23,12 +25,13 @@ header {
 }
 
 main {
-  background-image: url('images/map.png');
-  width: auto;
+  background-image: url('images/homemap.png');
+  height: 700px;
 }
 
 img {
   padding: 0;
+  border: none;
 }
 
 table tr td {
@@ -41,7 +44,32 @@ meter {
 
 .fighter {
   display: inline-block;
-  margin: 5% 0% 0% 25%;
+  margin: 5% 0% 0% 20%;
+}
+
+.moves li {
+  display: inline-block;
+  margin-left: 15%;
+}
+
+.moves button {
+  border: none;
+  color: white;
+  background-color: red;
+  font-family: 'VT323', serif;
+  font-size: 16px;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+}
+
+#arena {
+  margin-top: 30px;
+  background-image: url('images/kintsao.jpg');
+  background-repeat: no-repeat;
+  margin-left: 5%;
+  width: auto;
+  height: 500px;
 }
 
 #logo {
@@ -71,11 +99,16 @@ meter {
 }
 
 #endScreen {
-  margin-top: 80px;
+  margin-top: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#endScreen h1 {
+  color: red;
 }
 
 #endScreen form {
-  margin-left: 39%;
   font-size: 30px;
 }
 
