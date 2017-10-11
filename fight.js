@@ -15,12 +15,14 @@ var endScreen = document.getElementById('endScreen');
 var userForm = document.getElementById('userForm');
 var fighterOne = document.getElementById('PlayerOne');
 var fighterTwo = document.getElementById('PlayerTwo');
+var audio = document.getElementById('theme');
 
 //Making the game over screen invisible
 endScreen.style.visibility = 'hidden';
 
 //Starting on player one's turn
 pOneTurn();
+battleSound();
 
 //Loading fight data from local storage
 fightData = JSON.parse(localStorage.getItem('fightData'));
@@ -81,8 +83,8 @@ fighterOne.src = playerOne.filepath;
 fighterTwo.src = playerTwo.filepath;
 document.getElementById('playerOneName').innerHTML = playerOne.name;
 document.getElementById('playerTwoName').innerHTML = playerTwo.name;
-document.getElementById('playerOneHP').innerHTML = playerOne.health;
-document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
+document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
+document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
 
 //Functions to handle turns
 function pOneTurn(){
@@ -104,6 +106,31 @@ function addUser() {
   endScreen.style.visibility = 'visible';
 }
 
+//Functions to handle sound effects
+function attackSound () {
+  document.getElementById('attack').play();
+}
+
+function healSound () {
+  document.getElementById('heal').play();
+}
+
+function massiveDamage () {
+  document.getElementById('massiveDamage').play();
+}
+
+function lightHit () {
+  document.getElementById('lightHit').play();
+}
+
+function battleSound () {
+  document.getElementById('battle').play();
+}
+
+function gameOver () {
+  document.getElementById('gameOver').play();
+}
+
 //Event Handlers for character attacks, heals, and HP display updates
 
 function pOneAttHandler() {
@@ -112,9 +139,13 @@ function pOneAttHandler() {
   score = score + randomAttack;
   console.log(randomAttack);
   playerTwo.health = playerTwo.health - randomAttack;
-  document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
+  document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
+  attackSound();
+  if (randomAttack == 50 || randomAttack == 49) {
+    massiveDamage();
+  }
   if (playerTwo.health <= 0) {
-    console.log('Below Zero Triggered');
+    gameOver();
     addUser();
   } else {
     pTwoTurn();
@@ -126,6 +157,7 @@ function pOneDefHandler() {
   randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').innerHTML = playerOne.health;
+  healSound();
   pTwoTurn();
 }
 
@@ -135,8 +167,16 @@ function pTwoAttHandler() {
   score = score + randomAttack;
   console.log(randomAttack);
   playerOne.health = playerOne.health - randomAttack;
-  document.getElementById('playerOneHP').innerHTML = playerOne.health;
+  document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
+  attackSound();
+  if (randomAttack == 50 || randomAttack == 49) {
+    massiveDamage();
+  }
+  if (randomAttack == 20 || randomAttack == 21) {
+    lightHit();
+  }
   if (playerOne.health <= 0) {
+    gameOver();
     addUser();
   } else {
     pOneTurn();
@@ -149,8 +189,17 @@ function pTwoDefHandler() {
   score = score - randomHeal;
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
+  healSound();
   pOneTurn();
 }
+
+//Event handler for audio toggle
+document.getElementById('mute').addEventListener('click', function (e)
+{
+  e = e || window.event;
+  audio.muted = !audio.muted;
+  e.preventDefault();
+}, false);
 
 //Event Handler for leaderboard data and moving to leaderboard.html
 function leaderboardHandler (event) {
