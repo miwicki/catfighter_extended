@@ -27,15 +27,16 @@
     <source src="sound/guile.mp3" />
   </audio>
   <a href="#noscroll" id="mute">Toggle Audio</a>
+  <section id="arena">
   <section id="playerOneSec" class="fighter">
     <ul>
       <li id="playerOneName"></li>
       <li><meter id="playerOneHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
     </ul>
     <img src="" id="PlayerOne">
-    <ul>
-      <li><button id="pOneAtt" style="VISIBILITY: visible">Attack button</button></li>
-      <li><button id="pOneDef" style="VISIBILITY: visible">Defend button</button></li>
+    <ul class="moves">
+      <li><button id="pOneAtt" style="VISIBILITY: visible">ATTACK</button></li>
+      <li><button id="pOneDef" style="VISIBILITY: visible">HEAL</button></li>
     </ul>
   </section>
 
@@ -45,11 +46,12 @@
       <li><meter id="playerTwoHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
     </ul>
     <img src="" id="PlayerTwo">
-    <ul>
-      <li><button id="pTwoAtt" style="VISIBILITY: visible">Attack button</button></li>
-      <li><button id="pTwoDef" style="VISIBILITY: visible">Defend button</button></li>
+    <ul class="moves">
+      <li><button id="pTwoAtt" style="VISIBILITY: visible">ATTACK</button></li>
+      <li><button id="pTwoDef" style="VISIBILITY: visible">HEAL</button></li>
     </ul>
   </section>
+</section>
 
   <section id="endScreen">
     <h1>Game Over!</h1>
