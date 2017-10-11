@@ -42,6 +42,12 @@ table tr td {
   padding: 0;
 }
 
+#mute {
+  float: right;
+  color: white;
+  margin-right: 1%;
+}
+
 #playerOneSec img {
   height: 200px;
   width: 200px;
