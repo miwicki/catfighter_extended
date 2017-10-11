@@ -41,6 +41,9 @@ if (fightData === null || fightData.length < 2) {
 if (localStorage.getItem('leaderboard') !== null) {
   console.log('Data found');
   leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
+} else {
+  new User('Will','9999');
+  new User('Kat','700');
 }
 
 //Character construction function
@@ -57,8 +60,6 @@ function User(username, score) {
   leaderboard.push(this);
 }
 
-new User('Will','9999');
-new User('Kat','700');
 
 //all cats being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
@@ -83,23 +84,6 @@ document.getElementById('playerOneName').innerHTML = playerOne.name;
 document.getElementById('playerTwoName').innerHTML = playerTwo.name;
 document.getElementById('playerOneHP').innerHTML = playerOne.health;
 document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
-//function dedicated to the heal
-function heal() {
-  var randomHeal = 0;
-  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
-  score = score - randomHeal;
-  console.log(randomHeal);
-  return randomHeal;
-};
-
-//function dedicated to the attack
-/*function attackOne() {
-  var randomAttack = 0;
-  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
-  score = score + randomAttack;
-  console.log(randomAttack);
-  return randomAttack;
-};*/
 
 function leaderboardHandler (event) {
   event.preventDefault();
