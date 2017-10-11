@@ -79,18 +79,27 @@ for (var i in allCats){
 
 fighterOne.src = playerOne.filepath;
 fighterTwo.src = playerTwo.filepath;
+document.getElementById('playerOneName').innerHTML = playerOne.name;
+document.getElementById('playerTwoName').innerHTML = playerTwo.name;
+document.getElementById('playerOneHP').innerHTML = playerOne.health;
+document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
 //function dedicated to the heal
 function heal() {
-  var randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
+  var randomHeal = 0;
+  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
+  score = score - randomHeal;
+  console.log(randomHeal);
   return randomHeal;
 };
 
 //function dedicated to the attack
-function attackOne() {
-  var randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
+/*function attackOne() {
+  var randomAttack = 0;
+  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
+  console.log(randomAttack);
   return randomAttack;
-};
+};*/
 
 function leaderboardHandler (event) {
   event.preventDefault();
@@ -115,11 +124,12 @@ userForm.addEventListener('submit', leaderboardHandler);
 // playerTwoSec.addEventListener('click', fightHandler);
 
 function pOneAttHandler() {
-  var pOneAttack = attackOne();
-  playerTwo.health -= pOneAttack;
-  score = score + pOneAttack;
-  console.log('Player one health: ' + playerOne.health);
-  console.log('Player two health: ' + playerTwo.health);
+  var randomAttack = 0;
+  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
+  score = score + randomAttack;
+  console.log(randomAttack);
+  playerTwo.health = playerTwo.health - randomAttack;
+  document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
   if (playerTwo.health <= 0) {
     console.log('Below Zero Triggered');
     addUser();
@@ -128,32 +138,31 @@ function pOneAttHandler() {
   }
 }
 function pOneDefHandler() {
-  var pOneDefence = heal();
-  playerOne.health += pOneDefence;
-  score = score - pOneDefence;
-  console.log('Player one health: ' + playerOne.health);
-  console.log('Player two health: ' + playerTwo.health);
+  var randomHeal = 0;
+  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
+  playerOne.health = playerOne.health + randomHeal;
+  document.getElementById('playerOneHP').innerHTML = playerOne.health;
   pTwoTurn();
 }
 function pTwoAttHandler() {
-  var pTwoAttack = attackOne();
-  playerOne.health -= pTwoAttack;
-  score = score + pTwoAttack;
-  console.log('Player one health: ' + playerOne.health);
-  console.log('Player two health: ' + playerTwo.health);
+  var randomAttack = 0;
+  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
+  score = score + randomAttack;
+  console.log(randomAttack);
+  playerOne.health = playerOne.health - randomAttack;
+  document.getElementById('playerOneHP').innerHTML = playerOne.health;
   if (playerOne.health <= 0) {
-    console.log('Below Zero Triggered');
     addUser();
   } else {
     pOneTurn();
   }
 }
 function pTwoDefHandler() {
-  var pTwoDefence = heal();
-  playerTwo.health += pTwoDefence;
-  score = score - pTwoDefence;
-  console.log('Player one health: ' + playerOne.health);
-  console.log('Player two health: ' + playerTwo.health);
+  var randomHeal = 0;
+  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
+  score = score - randomHeal;
+  playerTwo.health = playerTwo.health + randomHeal;
+  document.getElementById('playerTwoHP').innerHTML = playerTwo.health;
   pOneTurn();
 }
 
