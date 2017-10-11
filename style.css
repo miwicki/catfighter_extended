@@ -32,6 +32,10 @@ table tr td {
   padding: 10px;
 }
 
+meter {
+  width: 200px;
+}
+
 .fighter {
   display: inline-block;
   margin: 5% 0% 0% 25%;

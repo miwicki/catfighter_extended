@@ -23,10 +23,14 @@
       <img id="logo" src="images/logo.png">
     </nav>
   </header>
+  <audio id="theme" autoplay="autoplay">
+    <source src="sound/guile.mp3" />
+  </audio>
+  <a href="#noscroll" id="mute">Toggle Audio</a>
   <section id="playerOneSec" class="fighter">
     <ul>
       <li id="playerOneName"></li>
-      <li id="playerOneHP"></li>
+      <li><meter id="playerOneHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
     </ul>
     <img src="" id="PlayerOne">
     <ul>
@@ -38,7 +42,7 @@
   <section id="playerTwoSec" class="fighter">
     <ul>
       <li id="playerTwoName"></li>
-      <li id="playerTwoHP"></li>
+      <li><meter id="playerTwoHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
     </ul>
     <img src="" id="PlayerTwo">
     <ul>
@@ -57,8 +61,12 @@
         <button id="saveGame" type="submit">Save</button>
       </fieldset>
     </form>
-    <script src="fight.js" type="text/javascript"></script>
     <audio id="attack" src="sound/scratch.wav"></audio>
     <audio id="heal" src="sound/heal.wav"></audio>
+    <audio id="battle" src="sound/battle.ogg"></audio>
+    <audio id="massiveDamage" src="sound/massivedamage.ogg"></audio>
+    <audio id="lightHit" src="sound/lighthit.ogg"></audio>
+    <audio id="gameOver" src="sound/gameover.ogg"></audio>
+    <script src="fight.js" type="text/javascript"></script>
   </body>
   </html>
