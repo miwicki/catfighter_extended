@@ -45,7 +45,7 @@ if (localStorage.getItem('leaderboard') !== null) {
   new User('BBB', '7');
 }
 
-//Character  and User constructor functions
+//Character and User constructor functions
 function Fighter(name, filepath) {
   this.name = name;
   this.filepath = filepath;
@@ -102,7 +102,8 @@ function pTwoTurn(){
 }
 
 //Function to make game over screen visible
-function addUser() {
+function gameOver () {
+  document.getElementById('gameOver').play();
   endScreen.style.visibility = 'visible';
 }
 
@@ -127,10 +128,6 @@ function battleSound () {
   document.getElementById('battle').play();
 }
 
-function gameOver () {
-  document.getElementById('gameOver').play();
-}
-
 //Event Handlers for character attacks, heals, and HP display updates
 
 function pOneAttHandler() {
@@ -149,8 +146,8 @@ function pOneAttHandler() {
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
+    document.getElementById('congratulations').innerHTML = 'Player One wins!';
     gameOver();
-    addUser();
   } else {
     pTwoTurn();
   }
@@ -184,8 +181,8 @@ function pTwoAttHandler() {
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
+    document.getElementById('congratulations').innerHTML = 'Player Two wins!';
     gameOver();
-    addUser();
   } else {
     pOneTurn();
   }
