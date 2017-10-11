@@ -19,6 +19,9 @@ document.getElementById('mute').addEventListener('click', function (e)
 
 //Event handler for character selection
 function characterHandler(event){
+  if (event.target.id === 'roster' || event.target.id === 'character-menu' || event.target.id === 'list' || event.target.id === 'secret-menu' || event.target.id === 'secret-list') {
+    return alert('Please click on a character.');
+  }
   if (fightData.length < 1) {
     fightData.push(event.target.alt);
     message.textContent = 'PLAYER 2 SELECT YOUR CHARACTER';
