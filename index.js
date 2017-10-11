@@ -4,9 +4,18 @@
 var fightData = [];
 var characterMenu = document.getElementById('roster');
 var message = document.getElementById('user-prompt');
+var audio = document.getElementById('theme');
 
 //Setting local storage
 localStorage.setItem('fightData', JSON.stringify(fightData));
+
+//Event handler for audio toggle
+document.getElementById('mute').addEventListener('click', function (e)
+{
+  e = e || window.event;
+  audio.muted = !audio.muted;
+  e.preventDefault();
+}, false);
 
 //Event handler for character selection
 function characterHandler(event){
