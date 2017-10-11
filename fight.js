@@ -145,6 +145,10 @@ function pOneAttHandler() {
     massiveDamage();
   }
   if (playerTwo.health <= 0) {
+    pOneAtt.style.visibility = 'hidden';
+    pOneDef.style.visibility = 'hidden';
+    pTwoAtt.style.visibility = 'hidden';
+    pTwoDef.style.visibility = 'hidden';
     gameOver();
     addUser();
   } else {
@@ -176,6 +180,10 @@ function pTwoAttHandler() {
     lightHit();
   }
   if (playerOne.health <= 0) {
+    pOneAtt.style.visibility = 'hidden';
+    pOneDef.style.visibility = 'hidden';
+    pTwoAtt.style.visibility = 'hidden';
+    pTwoDef.style.visibility = 'hidden';
     gameOver();
     addUser();
   } else {
