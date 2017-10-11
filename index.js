@@ -24,7 +24,6 @@ function characterHandler(event){
   }
   if (fightData.length < 1) {
     fightData.push(event.target.alt);
-    console.log(event.target.alt);
     message.textContent = 'PLAYER 2 SELECT YOUR CHARACTER';
   } else {
     fightData.push(event.target.alt);
