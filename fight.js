@@ -42,8 +42,12 @@ if (localStorage.getItem('leaderboard') !== null) {
   console.log('Data found');
   leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
 } else {
-  new User('Will','9999');
-  new User('Kat','700');
+  new User('WIL','9999');
+  new User('KAT','700');
+  new User('JJK','100');
+  new User('MAT', '2000');
+  new User('AAA', '42');
+  new User('BBB', '7');
 }
 
 //Character construction function
