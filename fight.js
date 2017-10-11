@@ -188,7 +188,7 @@ function pTwoDefHandler() {
   randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
   score = score - randomHeal;
   playerTwo.health = playerTwo.health + randomHeal;
-  document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
+  document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   healSound();
   pOneTurn();
 }
