@@ -18,7 +18,7 @@ var fighterTwo = document.getElementById('PlayerTwo');
 var audio = document.getElementById('theme');
 
 //Making the game over screen invisible
-// endScreen.style.visibility = 'hidden';
+endScreen.style.visibility = 'hidden';
 
 //Starting on player one's turn
 pOneTurn();
