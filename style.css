@@ -20,17 +20,6 @@ header {
   margin-right: 1%;
 }
 
-#about ul {
-  display: inline-block;
-  list-style: none;
-  margin-left: 15%;
-  text-align: center;
-}
-
-#about p {
-  text-align: center;
-}
-
 /*************************************/
 /*Everything below is driving the menu*/
 /*************************************/
