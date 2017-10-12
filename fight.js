@@ -95,8 +95,8 @@ Sprite.prototype.update = function(x, y){
       this.frameH,
       x,
       y,
-      this.width,
-      this.frameH
+      this.width * 3,
+      this.frameH * 3
     );
   }else{
     playerTwoContext.drawImage(
@@ -107,8 +107,8 @@ Sprite.prototype.update = function(x, y){
       this.frameH,
       x,
       y,
-      this.width,
-      this.frameH
+      this.width * 3,
+      this.frameH * 3
     );
   }
 };
@@ -130,21 +130,21 @@ var clawAnimation = new Sprite({
 function clawRender(){
   if(playerOneBool === true){
     if(clawAnimation.frameIndex === clawAnimation.frames){
-      playerOneContext.clearRect(0, 0, 32, 160);
+      playerOneContext.clearRect(0, 0, 96, 150);
       clawAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerOneContext.clearRect(0, 0, 32, 160);
+      playerOneContext.clearRect(0, 0, 96, 150);
       clawAnimation.update(0,0);
       clawAnimation.frameIndex++;
     }
   }else{
     if(clawAnimation.frameIndex === clawAnimation.frames){
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      playerTwoContext.clearRect(0, 0, 96, 150);
       clawAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      playerTwoContext.clearRect(0, 0, 96, 150);
       clawAnimation.update(0,0);
       clawAnimation.frameIndex++;
     }
@@ -154,22 +154,22 @@ function healRender (){
   if(playerOneBool === true){
     if(healthAnimation.frameIndex === healthAnimation.frames){
       console.log('Is this happenin');
-      playerOneContext.clearRect(0, 0, 32, 160);
+      playerOneContext.clearRect(0, 0, 96, 150);
       healthAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      playerTwoContext.clearRect(0, 0, 96, 150);
       healthAnimation.update(0, 0);
       healthAnimation.frameIndex++;
     }
   }else{
     if(healthAnimation.frameIndex === healthAnimation.frames){
       console.log('is this happening');
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      playerTwoContext.clearRect(0, 0, 96, 150);
       healthAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerOneContext.clearRect(0, 0, 32, 160);
+      playerOneContext.clearRect(0, 0, 96, 150);
       healthAnimation.update(0, 0);
       healthAnimation.frameIndex++;
     }
@@ -178,7 +178,7 @@ function healRender (){
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
 new Fighter('Grumpy-Cat', 'images/grumpy.jpg');
-new Fighter('Spookie','images/wizard.jpg');
+new Fighter('Espresso','images/wizard.jpg');
 new Fighter('Nova','images/nova.jpg');
 new Fighter('Gary', 'images/gary.jpg');
 new Fighter('Charlotte', 'images/charlotte.jpg');
@@ -278,7 +278,7 @@ function pOneDefHandler() {
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
   playerOneBool = true;
-  interval = setInterval(healRender, 100);
+  interval = setInterval(healRender, 200);
   pTwoTurn();
 }
 
@@ -318,7 +318,7 @@ function pTwoDefHandler() {
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   healSound();
   playerOneBool = false;
-  interval = setInterval(healRender, 100);
+  interval = setInterval(healRender, 200);
   pOneTurn();
 }
 

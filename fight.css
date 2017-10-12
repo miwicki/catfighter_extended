@@ -60,6 +60,7 @@ form button {
   margin-left: 5%;
   width: 1400px;
   height: 500px;
+  position: relative;
 }
 
 #playerOneSec img {
@@ -89,4 +90,16 @@ form button {
 
 #fight ul {
   display: inline-block;
+}
+
+#playerOneAnimations {
+  position: absolute;
+  top: 45%;
+  left: 25%;
+}
+
+#playerTwoAnimations {
+  position: absolute;
+  top: 45%;
+  right: 25%;
 }
