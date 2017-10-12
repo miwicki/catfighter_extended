@@ -50,6 +50,7 @@ if (fightData === null || fightData.length < 2) {
 }
 
 if (localStorage.getItem('leaderboard') !== null) {
+  console.log('Data found');
   leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
 } else {
   new User('WIL','9999');
@@ -64,10 +65,6 @@ if (localStorage.getItem('leaderboard') !== null) {
 function Fighter(name, filepath, minAtt, maxAtt, minDef, maxDef) {
   this.name = name;
   this.filepath = filepath;
-  this.minAtt = minAtt;
-  this.maxAtt = maxAtt;
-  this.minDef = minDef;
-  this.maxDef = maxDef;
   this.health = 100;
   allCats.push(this);
 }
@@ -99,8 +96,8 @@ Sprite.prototype.update = function(x, y){
       this.frameH,
       x,
       y,
-      this.width,
-      this.frameH
+      this.width * 3,
+      this.frameH * 3
     );
   }else{
     playerTwoContext.drawImage(
@@ -111,8 +108,8 @@ Sprite.prototype.update = function(x, y){
       this.frameH,
       x,
       y,
-      this.width,
-      this.frameH
+      this.width * 3,
+      this.frameH * 3
     );
   }
 };
@@ -140,21 +137,21 @@ var clawAnimation = new Sprite({
 function clawRender(){
   if(playerOneBool === true){
     if(clawAnimation.frameIndex === clawAnimation.frames){
-      playerOneContext.clearRect(0, 0, 32, 160);
+      playerOneContext.clearRect(0, 0, 96, 150);
       clawAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerOneContext.clearRect(0, 0, 32, 160);
+      playerOneContext.clearRect(0, 0, 96, 150);
       clawAnimation.update(0,0);
       clawAnimation.frameIndex++;
     }
   }else{
     if(clawAnimation.frameIndex === clawAnimation.frames){
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      playerTwoContext.clearRect(0, 0, 96, 150);
       clawAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      playerTwoContext.clearRect(0, 0, 96, 150);
       clawAnimation.update(0,0);
       clawAnimation.frameIndex++;
     }
@@ -165,21 +162,23 @@ function clawRender(){
 function healRender (){
   if(playerOneBool === true){
     if(healthAnimation.frameIndex === healthAnimation.frames){
-      playerOneContext.clearRect(0, 0, 32, 160);
+      console.log('Is this happenin');
+      playerOneContext.clearRect(0, 0, 96, 150);
       healthAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      playerTwoContext.clearRect(0, 0, 96, 150);
       healthAnimation.update(0, 0);
       healthAnimation.frameIndex++;
     }
   }else{
     if(healthAnimation.frameIndex === healthAnimation.frames){
-      playerTwoContext.clearRect(0, 0, 32, 160);
+      console.log('is this happening');
+      playerTwoContext.clearRect(0, 0, 96, 150);
       healthAnimation.frameIndex = 0;
       clearInterval(interval);
     }else{
-      playerOneContext.clearRect(0, 0, 32, 160);
+      playerOneContext.clearRect(0, 0, 96, 150);
       healthAnimation.update(0, 0);
       healthAnimation.frameIndex++;
     }
@@ -187,13 +186,13 @@ function healRender (){
 }
 
 //All characters being instanced
-new Fighter('Cute-Cat', 'images/kitty1.jpg', 10, 50, 8, 20);
-new Fighter('Grumpy-Cat', 'images/grumpy.jpg', 20, 50, 3, 12);
-new Fighter('Espresso','images/wizard.jpg', 40, 50, 1, 7);
-new Fighter('Nova','images/nova.jpg', 10, 70, 1, 15);
-new Fighter('Gary', 'images/gary.jpg', 30, 60, 4, 12);
-new Fighter('Charlotte', 'images/charlotte.jpg', 30, 60, 4, 12);
-new Fighter('Demi', 'images/demi.jpg', 5, 100, 2, 15);
+new Fighter('Cute-Cat', 'images/kitty1.jpg');
+new Fighter('Grumpy-Cat', 'images/grumpy.jpg');
+new Fighter('Espresso','images/wizard.jpg');
+new Fighter('Nova','images/nova.jpg');
+new Fighter('Gary', 'images/gary.jpg');
+new Fighter('Charlotte', 'images/charlotte.jpg');
+new Fighter('Demi', 'images/demi.jpg');
 
 //Assigning characters to players
 for (var i in allCats){
@@ -260,34 +259,31 @@ function battleSound () {
 function pOneAttHandler() {
   var randomAttack = 0;
   playerOneBool = false;
-  randomAttack = Math.floor(Math.random() * (playerOne.maxAtt - playerOne.minAtt + 1) + playerOne.minAtt);
+  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
   playerTwo.health = playerTwo.health - randomAttack;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   attackSound();
-  if (randomAttack == playerOne.maxAtt || randomAttack == (playerOne.maxAtt - 1)) {
+  if (randomAttack == 50 || randomAttack == 49) {
     massiveDamage();
-  }
-  if (randomAttack == playerOne.minAtt || randomAttack == (playerOne.minAtt + 1)) {
-    lightHit();
   }
   if (playerTwo.health <= 0) {
     pOneAtt.style.visibility = 'hidden';
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
-    interval = setInterval(clawRender, 250);
+    interval = setInterval(clawRender, 125);
     document.getElementById('congratulations').innerHTML = 'Player One wins!';
     gameOver();
   } else {
-    interval = setInterval(clawRender, 250);
+    interval = setInterval(clawRender, 125);
     pTwoTurn();
   }
 }
 
 function pOneDefHandler() {
   var randomHeal = 0;
-  randomHeal = Math.floor(Math.random() * (playerOne.maxDef - playerOne.minDef + 1) + playerOne.minDef);
+  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
@@ -299,15 +295,15 @@ function pOneDefHandler() {
 function pTwoAttHandler() {
   var randomAttack = 0;
   playerOneBool = true;
-  randomAttack = Math.floor(Math.random() * (playerTwo.maxAtt - playerTwo.minAtt + 1) + playerTwo.minAtt);
+  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
   playerOne.health = playerOne.health - randomAttack;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   attackSound();
-  if (randomAttack == playerTwo.maxAtt || randomAttack == (playerTwo.maxAtt - 1)) {
+  if (randomAttack == 50 || randomAttack == 49) {
     massiveDamage();
   }
-  if (randomAttack == playerTwo.minAtt || randomAttack == (playerTwo.minAtt + 1)) {
+  if (randomAttack == 20 || randomAttack == 21) {
     lightHit();
   }
   if (playerOne.health <= 0) {
@@ -315,18 +311,18 @@ function pTwoAttHandler() {
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
-    interval = setInterval(clawRender, 250);
+    interval = setInterval(clawRender, 125);
     document.getElementById('congratulations').innerHTML = 'Player Two wins!';
     gameOver();
   } else {
-    interval = setInterval(clawRender, 250);
+    interval = setInterval(clawRender, 125);
     pOneTurn();
   }
 }
 
 function pTwoDefHandler() {
   var randomHeal = 0;
-  randomHeal = Math.floor(Math.random() * (playerTwo.maxDef - playerTwo.minDef + 1) + playerTwo.minDef);
+  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
   score = score - randomHeal;
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
