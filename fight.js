@@ -20,7 +20,9 @@ var animation = document.querySelector('canvas');
 var context = animation.getContext('2d');
 context.imageSmoothingEnabled = false;
 var myHealSpriteSheet = document.getElementById('healSprite');
-var myClawSpriteSheet = document.getElementById('clawSprite');
+var myScratchSpriteSheet = document.getElementById('scratchSprite');
+myScratchSpriteSheet.style.visibility = 'hidden';
+myHealSpriteSheet.style.visibility = 'hidden';
 var interval;
 var x;
 var y;
@@ -106,7 +108,7 @@ var healthAnimation = new Sprite({
   ticksPerFrame: 10
 });
 var clawAnimation = new Sprite({
-  image: myClawSpriteSheet,
+  image: myScratchSpriteSheet,
   frames: 4,
   ticksPerFrame: 10
 });
@@ -118,6 +120,7 @@ function clawRender(){
     clawAnimation.frameIndex = 0;
     clearInterval(interval);
   }else{
+    context.clearRect(0, 0, 32, 160);
     clawAnimation.update(0,0);
     clawAnimation.frameIndex++;
   }
@@ -128,6 +131,7 @@ function healRender (){
     healthAnimation.frameIndex = 0;
     clearInterval(interval);
   }else{
+    context.clearRect(0, 0, 32, 160);
     healthAnimation.update(0, 0);
     healthAnimation.frameIndex++;
   }
