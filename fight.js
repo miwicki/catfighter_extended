@@ -64,12 +64,12 @@ function User(username, score) {
 
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
-new Fighter('Grumpy-Cat', 'images/GrumpyCat.jpg');
-new Fighter('Spookie','images/spookie.jpg');
+new Fighter('Grumpy-Cat', 'images/grumpy.jpg');
+new Fighter('Spookie','images/wizard.jpg');
 new Fighter('Nova','images/nova.jpg');
 new Fighter('Gary', 'images/gary.jpg');
 new Fighter('Charlotte', 'images/charlotte.jpg');
-new Fighter('Demi', 'images/demi.png');
+new Fighter('Demi', 'images/demi.jpg');
 
 //Assigning characters to players
 for (var i in allCats){
