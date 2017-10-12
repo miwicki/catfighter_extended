@@ -19,7 +19,8 @@ var audio = document.getElementById('theme');
 var animation = document.querySelector('canvas');
 var context = animation.getContext('2d');
 context.imageSmoothingEnabled = false;
-var mySpriteSheet = document.getElementById('healSprite');
+var myHealSpriteSheet = document.getElementById('healSprite');
+var myClawSpriteSheet = document.getElementById('clawSprite');
 var interval;
 var x;
 var y;
@@ -74,14 +75,13 @@ function Sprite(model){
   this.tickCount = 0;
 }
 Sprite.prototype.update = function(x, y){
+  console.log(this.frameIndex);
   this.tickCount += 1;
   if(this.tickCount > this.ticksPerFrame){
     this.tickCount = 0;
     if(this.frameIndex < this.frames - 1){
       this.frames += 1;
-    }//else{
-      //this.frameIndex = 0;
-    //}
+    }
   }
   context.drawImage(
     this.image,
@@ -101,11 +101,28 @@ function User(username, score) {
   leaderboard.push(this);
 }
 var healthAnimation = new Sprite({
-  image: mySpriteSheet,
+  image: myHealSpriteSheet,
   frames: 5,
   ticksPerFrame: 10
 });
-function render (){
+var clawAnimation = new Sprite({
+  image: myClawSpriteSheet,
+  frames: 4,
+  ticksPerFrame: 10
+});
+console.log(clawAnimation);
+function clawRender(){
+  console.log(clawAnimation.frameIndex);
+  if(clawAnimation.frameIndex === clawAnimation.frames){
+    context.clearRect(0, 0, 32, 160);
+    clawAnimation.frameIndex = 0;
+    clearInterval(interval);
+  }else{
+    clawAnimation.update(0,0);
+    clawAnimation.frameIndex++;
+  }
+}
+function healRender (){
   if(healthAnimation.frameIndex === healthAnimation.frames){
     context.clearRect(0, 0, 32, 160);
     healthAnimation.frameIndex = 0;
@@ -190,7 +207,6 @@ function pOneAttHandler() {
   var randomAttack = 0;
   randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
-  console.log(randomAttack);
   playerTwo.health = playerTwo.health - randomAttack;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   attackSound();
@@ -205,6 +221,7 @@ function pOneAttHandler() {
     document.getElementById('congratulations').innerHTML = 'Player One wins!';
     gameOver();
   } else {
+    interval = setInterval(clawRender, 250);
     pTwoTurn();
   }
 }
@@ -215,7 +232,7 @@ function pOneDefHandler() {
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
-  interval = setInterval(render, 200);
+  interval = setInterval(healRender, 200);
   pTwoTurn();
 }
 
@@ -241,6 +258,7 @@ function pTwoAttHandler() {
     document.getElementById('congratulations').innerHTML = 'Player Two wins!';
     gameOver();
   } else {
+    interval = setInterval(clawRender, 250);
     pOneTurn();
   }
 }
@@ -252,7 +270,7 @@ function pTwoDefHandler() {
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   healSound();
-  interval = setInterval(render, 200);
+  interval = setInterval(healRender, 200);
   pOneTurn();
 }
 
