@@ -16,12 +16,15 @@ var userForm = document.getElementById('userForm');
 var fighterOne = document.getElementById('PlayerOne');
 var fighterTwo = document.getElementById('PlayerTwo');
 var audio = document.getElementById('theme');
-
+var arrayOfFunctions = [
+  pOneTurn,
+  pTwoTurn
+];
 //Making the game over screen invisible
 endScreen.style.visibility = 'hidden';
 
 //Starting on player one's turn
-pOneTurn();
+arrayOfFunctions[Math.floor(Math.random() * arrayOfFunctions.length)]();
 battleSound();
 
 //Loading fight data from local storage
