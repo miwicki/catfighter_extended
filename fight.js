@@ -37,7 +37,6 @@ if (fightData === null || fightData.length < 2) {
 }
 
 if (localStorage.getItem('leaderboard') !== null) {
-  console.log('Data found');
   leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
 } else {
   new User('WIL','9999');
@@ -65,7 +64,7 @@ function User(username, score) {
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
 new Fighter('Grumpy-Cat', 'images/grumpy.jpg');
-new Fighter('Spookie','images/wizard.jpg');
+new Fighter('Espresso','images/wizard.jpg');
 new Fighter('Nova','images/nova.jpg');
 new Fighter('Gary', 'images/gary.jpg');
 new Fighter('Charlotte', 'images/charlotte.jpg');
@@ -137,7 +136,6 @@ function pOneAttHandler() {
   var randomAttack = 0;
   randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
-  console.log(randomAttack);
   playerTwo.health = playerTwo.health - randomAttack;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   attackSound();
@@ -169,7 +167,6 @@ function pTwoAttHandler() {
   var randomAttack = 0;
   randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
-  console.log(randomAttack);
   playerOne.health = playerOne.health - randomAttack;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   attackSound();
