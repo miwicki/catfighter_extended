@@ -4,7 +4,7 @@ body {
   background-color: black;
 }
 
-body h1 {
+/*body h1 {
   font-size: 50px;
   text-align: center;
   margin: 30px;
@@ -14,14 +14,14 @@ body h2 {
   font-size: 40px;
   text-align: center;
   margin-top: 20px;
-}
+}*/
 
 header {
   background-color: red;
   height: 120px;
 }
 
-main {
+/*main {
   background-image: url('images/homemap.png');
   height: 700px;
 }
@@ -29,7 +29,7 @@ main {
 img {
   padding: 0;
   border: none;
-}
+}*/
 
 table tr td {
   padding: 10px;
@@ -37,6 +37,17 @@ table tr td {
 
 meter {
   width: 200px;
+}
+
+form button {
+  border: none;
+  color: white;
+  background-color: red;
+  font-family: 'VT323', serif;
+  font-size: 16px;
+  padding: 5px;
+  width: 40px;
+  text-align: center;
 }
 
 .fighter {
@@ -62,16 +73,23 @@ meter {
   text-align: center;
 }
 
-form button {
-  border: none;
-  color: white;
-  background-color: red;
-  font-family: 'VT323', serif;
-  font-size: 16px;
-  padding: 5px;
-  width: 40px;
-  text-align: center;
+#arcade {
+  background-image: url('images/arcade.jpg');
+  background-repeat: no-repeat;
+  height: 700px;
+  margin-left: 25%;
 }
+
+#arcade table {
+  margin-top: 25%;
+  margin-left: 15%;
+  font-size: 24px;
+}
+
+#arcade tr td {
+    padding: 5px 30px;
+}
+
 
 #arena {
   margin-top: 30px;
@@ -103,10 +121,10 @@ form button {
   width: 200px;
 }
 
-#roster img {
+/*#roster img {
   height: 200px;
   width: 200px;
-}
+}*/
 
 #endScreen {
   position: absolute;
@@ -123,20 +141,20 @@ form button {
   font-size: 30px;
 }
 
-#leaderboard {
+/*#leaderboard {
   font-size: 30px;
   margin-left: 40%;
 }
 
 #leaderboard tr td {
   padding: 10px 30px;
-}
+}*/
 
 #fight ul {
   display: inline-block;
 }
 
-#character-menu ul li {
+/*#character-menu ul li {
   display: inline-block;
   padding: 0;
 }
@@ -160,7 +178,7 @@ form button {
 #secret-menu {
   margin-top: 80px;
   margin-left: 9%;
-}
+}*/
 
 #about ul {
   display: inline-block;
