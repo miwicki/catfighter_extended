@@ -20,6 +20,7 @@ var animation = document.querySelector('canvas');
 var context = animation.getContext('2d');
 context.imageSmoothingEnabled = false;
 var mySpriteSheet = document.getElementById('healSprite');
+var interval;
 var x;
 var y;
 
@@ -102,8 +103,14 @@ var healthAnimation = new Sprite({
   ticksPerFrame: 10
 });
 function render (){
-  context.clearRect(0,0,32,160);
-  healthAnimation.update(0, 0);
+  if(healthAnimation.frameIndex === healthAnimation.frames){
+    context.clearRect(0, 0, 32, 160);
+    healthAnimation.frameIndex = 0;
+    clearInterval(interval);
+  }else{
+    healthAnimation.update(0, 0);
+    healthAnimation.frameIndex++;
+  }
 }
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
@@ -205,7 +212,7 @@ function pOneDefHandler() {
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
-  render();
+  interval = setInterval(render, 500);
   pTwoTurn();
 }
 
