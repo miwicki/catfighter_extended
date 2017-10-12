@@ -48,31 +48,32 @@
       </form>
     </section>
 
-    <!-- Player One's Section -->
-    <section id="playerOneSec" class="fighter">
-      <ul>
-        <li id="playerOneName"></li>
-        <li><meter id="playerOneHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
-      </ul>
-      <img src="" id="PlayerOne">
-      <ul class="moves">
-        <li><button id="pOneAtt" style="VISIBILITY: visible">ATTACK</button></li>
-        <li><button id="pOneDef" style="VISIBILITY: visible">HEAL</button></li>
-      </ul>
-    </section>
-
-    <!-- Player Two's Section -->
-    <section id="playerTwoSec" class="fighter">
-      <ul>
-        <li id="playerTwoName"></li>
-        <li><meter id="playerTwoHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
-      </ul>
-      <img src="" id="PlayerTwo">
-      <ul class="moves">
-        <li><button id="pTwoAtt" style="VISIBILITY: visible">ATTACK</button></li>
-        <li><button id="pTwoDef" style="VISIBILITY: visible">HEAL</button></li>
-      </ul>
-    </section>
+  <section id="playerOneSec" class="fighter">
+    <ul>
+      <li id="playerOneName"></li>
+      <li><meter id="playerOneHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
+    </ul>
+    <img src="" id="PlayerOne">
+    <ul class="moves">
+      <li><button id="pOneAtt" style="VISIBILITY: visible">ATTACK</button></li>
+      <li><button id="pOneDef" style="VISIBILITY: visible">HEAL</button></li>
+    </ul>
+  </section>
+  <canvas id="playerOneAnimations" width="32px" height="160px"></canvas>
+  <canvas id="playerTwoAnimations" width="32px" height="160px"></canvas>
+  <img src="images/healclear.png" id="healSprite" style="">
+  <img src="images/scratchclear.png" id="scratchSprite" style="">
+  
+  <section id="playerTwoSec" class="fighter">
+    <ul>
+      <li id="playerTwoName"></li>
+      <li><meter id="playerTwoHP" low="30" high="100" optimum="90" max="100" value=""></meter></li>
+    </ul>
+    <img src="" id="PlayerTwo">
+    <ul class="moves">
+      <li><button id="pTwoAtt" style="VISIBILITY: visible">ATTACK</button></li>
+      <li><button id="pTwoDef" style="VISIBILITY: visible">HEAL</button></li>
+    </ul>
   </section>
 
   <!-- Audio files for sound effects -->

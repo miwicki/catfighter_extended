@@ -16,10 +16,24 @@ var userForm = document.getElementById('userForm');
 var fighterOne = document.getElementById('PlayerOne');
 var fighterTwo = document.getElementById('PlayerTwo');
 var audio = document.getElementById('theme');
+var playerOneAnimations = document.getElementById('playerOneAnimations');
+var playerTwoAnimations = document.getElementById('playerTwoAnimations');
+var playerOneContext = playerOneAnimations.getContext('2d');
+var playerTwoContext = playerTwoAnimations.getContext('2d');
+playerOneContext.imageSmoothingEnabled = false;
+playerTwoContext.imageSmoothingEnabled = false;
+var myHealSpriteSheet = document.getElementById('healSprite');
+var myScratchSpriteSheet = document.getElementById('scratchSprite');
+myScratchSpriteSheet.style.visibility = 'hidden';
+myHealSpriteSheet.style.visibility = 'hidden';
+var interval;
+var x;
+var y;
 var arrayOfFunctions = [
   pOneTurn,
   pTwoTurn
 ];
+var playerOneBool = false;
 //Making the game over screen invisible
 endScreen.style.visibility = 'hidden';
 
@@ -59,12 +73,111 @@ function Fighter(name, filepath, minAtt, maxAtt, minDef, maxDef) {
   allCats.push(this);
 }
 
+function Sprite(model){
+  this.image = model.image;
+  this.frames = model.frames;
+  this.ticksPerFrame = model.ticksPerFrame;
+  this.width = this.image.width;
+  this.height = this.image.height;
+  this.frameH = this.height / model.frames;
+  this.frameIndex = 0;
+  this.tickCount = 0;
+}
+Sprite.prototype.update = function(x, y){
+  this.tickCount += 1;
+  if(this.tickCount > this.ticksPerFrame){
+    this.tickCount = 0;
+    if(this.frameIndex < this.frames - 1){
+      this.frames += 1;
+    }
+  }
+  if(playerOneBool === true){
+    playerOneContext.drawImage(
+      this.image,
+      0,
+      this.frameIndex * this.frameH,
+      this.width,
+      this.frameH,
+      x,
+      y,
+      this.width,
+      this.frameH
+    );
+  }else{
+    playerTwoContext.drawImage(
+      this.image,
+      0,
+      this.frameIndex * this.frameH,
+      this.width,
+      this.frameH,
+      x,
+      y,
+      this.width,
+      this.frameH
+    );
+  }
+};
 function User(username, score) {
   this.username = username;
   this.score = score;
   leaderboard.push(this);
 }
-
+var healthAnimation = new Sprite({
+  image: myHealSpriteSheet,
+  frames: 5,
+  ticksPerFrame: 10
+});
+var clawAnimation = new Sprite({
+  image: myScratchSpriteSheet,
+  frames: 4,
+  ticksPerFrame: 10
+});
+function clawRender(){
+  if(playerOneBool === true){
+    if(clawAnimation.frameIndex === clawAnimation.frames){
+      playerOneContext.clearRect(0, 0, 32, 160);
+      clawAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerOneContext.clearRect(0, 0, 32, 160);
+      clawAnimation.update(0,0);
+      clawAnimation.frameIndex++;
+    }
+  }else{
+    if(clawAnimation.frameIndex === clawAnimation.frames){
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      clawAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      clawAnimation.update(0,0);
+      clawAnimation.frameIndex++;
+    }
+  }
+}
+function healRender (){
+  if(playerOneBool === true){
+    if(healthAnimation.frameIndex === healthAnimation.frames){
+      playerOneContext.clearRect(0, 0, 32, 160);
+      healthAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      healthAnimation.update(0, 0);
+      healthAnimation.frameIndex++;
+    }
+  }else{
+    if(healthAnimation.frameIndex === healthAnimation.frames){
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      healthAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerOneContext.clearRect(0, 0, 32, 160);
+      healthAnimation.update(0, 0);
+      healthAnimation.frameIndex++;
+    }
+  }
+}
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg', 10, 50, 8, 20);
 new Fighter('Grumpy-Cat', 'images/grumpy.jpg', 20, 50, 3, 12);
@@ -138,6 +251,7 @@ function battleSound () {
 
 function pOneAttHandler() {
   var randomAttack = 0;
+  playerOneBool = false;
   randomAttack = Math.floor(Math.random() * (playerOne.maxAtt - playerOne.minAtt + 1) + playerOne.minAtt);
   score = score + randomAttack;
   playerTwo.health = playerTwo.health - randomAttack;
@@ -154,9 +268,11 @@ function pOneAttHandler() {
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
+    interval = setInterval(clawRender, 250);
     document.getElementById('congratulations').innerHTML = 'Player One wins!';
     gameOver();
   } else {
+    interval = setInterval(clawRender, 250);
     pTwoTurn();
   }
 }
@@ -167,11 +283,14 @@ function pOneDefHandler() {
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
+  playerOneBool = true;
+  interval = setInterval(healRender, 200);
   pTwoTurn();
 }
 
 function pTwoAttHandler() {
   var randomAttack = 0;
+  playerOneBool = true;
   randomAttack = Math.floor(Math.random() * (playerTwo.maxAtt - playerTwo.minAtt + 1) + playerTwo.minAtt);
   score = score + randomAttack;
   playerOne.health = playerOne.health - randomAttack;
@@ -188,9 +307,11 @@ function pTwoAttHandler() {
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
+    interval = setInterval(clawRender, 250);
     document.getElementById('congratulations').innerHTML = 'Player Two wins!';
     gameOver();
   } else {
+    interval = setInterval(clawRender, 250);
     pOneTurn();
   }
 }
@@ -202,6 +323,8 @@ function pTwoDefHandler() {
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   healSound();
+  playerOneBool = false;
+  interval = setInterval(healRender, 200);
   pOneTurn();
 }
 
