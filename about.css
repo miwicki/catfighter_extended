@@ -11,11 +11,14 @@ img {
 
 #about div{
   width: 400px;
-  height: 250px;
+  height: 475px;
+
 }
 
 #about img {
   margin-left: 25px;
+  height: 350px;
+  width: 350px;
 }
 
 #about-ul-one {
@@ -31,7 +34,7 @@ img {
 }
 
 #special {
-  margin-top: 575px;
+  margin-top: 1025px;
 }
 
 #about p {
