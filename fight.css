@@ -34,7 +34,7 @@ form button {
   display: inline-block;
   margin-left: 20%;
   margin-top: 10%;
-  padding-right: 5%;
+
 }
 
 .moves li {
@@ -101,5 +101,5 @@ form button {
 #playerTwoAnimations {
   position: absolute;
   top: 45%;
-  right: 25%;
+  right: 30%;
 }

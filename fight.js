@@ -50,7 +50,6 @@ if (fightData === null || fightData.length < 2) {
 }
 
 if (localStorage.getItem('leaderboard') !== null) {
-  console.log('Data found');
   leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
 } else {
   new User('WIL','9999');
@@ -65,6 +64,10 @@ if (localStorage.getItem('leaderboard') !== null) {
 function Fighter(name, filepath, minAtt, maxAtt, minDef, maxDef) {
   this.name = name;
   this.filepath = filepath;
+  this.minAtt = minAtt;
+  this.maxAtt = maxAtt;
+  this.minDef = minDef;
+  this.maxDef = maxDef;
   this.health = 100;
   allCats.push(this);
 }
@@ -162,7 +165,6 @@ function clawRender(){
 function healRender (){
   if(playerOneBool === true){
     if(healthAnimation.frameIndex === healthAnimation.frames){
-      console.log('Is this happenin');
       playerOneContext.clearRect(0, 0, 96, 150);
       healthAnimation.frameIndex = 0;
       clearInterval(interval);
@@ -173,7 +175,6 @@ function healRender (){
     }
   }else{
     if(healthAnimation.frameIndex === healthAnimation.frames){
-      console.log('is this happening');
       playerTwoContext.clearRect(0, 0, 96, 150);
       healthAnimation.frameIndex = 0;
       clearInterval(interval);
@@ -186,13 +187,13 @@ function healRender (){
 }
 
 //All characters being instanced
-new Fighter('Cute-Cat', 'images/kitty1.jpg');
-new Fighter('Grumpy-Cat', 'images/grumpy.jpg');
-new Fighter('Espresso','images/wizard.jpg');
-new Fighter('Nova','images/nova.jpg');
-new Fighter('Gary', 'images/gary.jpg');
-new Fighter('Charlotte', 'images/charlotte.jpg');
-new Fighter('Demi', 'images/demi.jpg');
+new Fighter('Cute-Cat', 'images/kitty1.jpg', 10, 50, 8, 20);
+new Fighter('Grumpy-Cat', 'images/grumpy.jpg', 20, 50, 3, 12);
+new Fighter('Espresso','images/wizard.jpg', 40, 50, 1, 7);
+new Fighter('Nova','images/nova.jpg', 10, 70, 1, 15);
+new Fighter('Gary', 'images/gary.jpg', 30, 60, 4, 12);
+new Fighter('Charlotte', 'images/charlotte.jpg', 30, 60, 4, 12);
+new Fighter('Demi', 'images/demi.jpg', 5, 100, 2, 15);
 
 //Assigning characters to players
 for (var i in allCats){
@@ -259,13 +260,16 @@ function battleSound () {
 function pOneAttHandler() {
   var randomAttack = 0;
   playerOneBool = false;
-  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
+  randomAttack = Math.floor(Math.random() * (playerOne.maxAtt - playerOne.minAtt + 1) + playerOne.minAtt);
   score = score + randomAttack;
   playerTwo.health = playerTwo.health - randomAttack;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   attackSound();
-  if (randomAttack == 50 || randomAttack == 49) {
+  if (randomAttack == playerOne.maxAtt || randomAttack == (playerOne.maxAtt - 1)) {
     massiveDamage();
+  }
+  if (randomAttack == playerOne.minAtt || randomAttack == (playerOne.minAtt + 1)) {
+    lightHit();
   }
   if (playerTwo.health <= 0) {
     pOneAtt.style.visibility = 'hidden';
@@ -283,7 +287,7 @@ function pOneAttHandler() {
 
 function pOneDefHandler() {
   var randomHeal = 0;
-  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
+  randomHeal = Math.floor(Math.random() * (playerOne.maxDef - playerOne.minDef + 1) + playerOne.minDef);
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
@@ -295,15 +299,15 @@ function pOneDefHandler() {
 function pTwoAttHandler() {
   var randomAttack = 0;
   playerOneBool = true;
-  randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
+  randomAttack = Math.floor(Math.random() * (playerTwo.maxAtt - playerTwo.minAtt + 1) + playerTwo.minAtt);
   score = score + randomAttack;
   playerOne.health = playerOne.health - randomAttack;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   attackSound();
-  if (randomAttack == 50 || randomAttack == 49) {
+  if (randomAttack == playerTwo.maxAtt || randomAttack == (playerTwo.maxAtt - 1)) {
     massiveDamage();
   }
-  if (randomAttack == 20 || randomAttack == 21) {
+  if (randomAttack == playerTwo.minAtt || randomAttack == (playerTwo.minAtt + 1)) {
     lightHit();
   }
   if (playerOne.health <= 0) {
@@ -322,7 +326,7 @@ function pTwoAttHandler() {
 
 function pTwoDefHandler() {
   var randomHeal = 0;
-  randomHeal = Math.floor(Math.random() * (12 - 2) + 3);
+  randomHeal = Math.floor(Math.random() * (playerTwo.maxDef - playerTwo.minDef + 1) + playerTwo.minDef);
   score = score - randomHeal;
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
