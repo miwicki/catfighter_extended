@@ -79,9 +79,9 @@ Sprite.prototype.update = function(x, y){
     this.tickCount = 0;
     if(this.frameIndex < this.frames - 1){
       this.frames += 1;
-    }else{
-      this.frameIndex = 0;
-    }
+    }//else{
+      //this.frameIndex = 0;
+    //}
   }
   context.drawImage(
     this.image,
@@ -215,7 +215,7 @@ function pOneDefHandler() {
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
-  interval = setInterval(render, 500);
+  interval = setInterval(render, 200);
   pTwoTurn();
 }
 
@@ -252,7 +252,7 @@ function pTwoDefHandler() {
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   healSound();
-  render();
+  interval = setInterval(render, 200);
   pOneTurn();
 }
 
