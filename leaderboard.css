@@ -1,0 +1,17 @@
+main {
+  background-image: url('images/arcade.jpg');
+  background-repeat: no-repeat;
+  height: 700px;
+  margin-left: 25%;
+}
+
+main table {
+  position: absolute;
+  margin-top: 20%;
+  margin-left: 12%;
+  font-size: 24px;
+}
+
+main tr td{
+    padding: 5px 30px;
+}

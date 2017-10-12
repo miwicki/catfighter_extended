@@ -1,0 +1,56 @@
+body h1 {
+  font-size: 50px;
+  text-align: center;
+  margin: 30px;
+}
+
+body h2 {
+  font-size: 40px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+img {
+  padding: 0;
+  border: none;
+}
+
+main {
+  background-image: url('images/homemap.png');
+  height: 700px;
+}
+
+#roster img {
+  height: 200px;
+  width: 200px;
+}
+
+#character-menu ul li {
+  display: inline-block;
+  padding: 0;
+}
+
+#secret-menu ul li {
+  display: inline-block;
+}
+
+#character-menu ul {
+  margin-left: 20%;
+}
+
+#secret-menu ul {
+  margin-left: 20%;
+}
+
+#character-menu {
+  margin-top: 90px;
+}
+
+#secret-menu {
+  margin-top: 80px;
+  margin-left: 9%;
+}
+
+#cheatStatus {
+  color: red;
+}
