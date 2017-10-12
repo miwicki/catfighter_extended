@@ -1,20 +1,17 @@
-table tr td {
-  padding: 10px;
-}
-
-#arcade {
+main {
   background-image: url('images/arcade.jpg');
   background-repeat: no-repeat;
   height: 700px;
   margin-left: 25%;
 }
 
-#arcade table {
-  margin-top: 25%;
-  margin-left: 15%;
+main table {
+  position: absolute;
+  margin-top: 20%;
+  margin-left: 12%;
   font-size: 24px;
 }
 
-#arcade tr td {
+main tr td{
     padding: 5px 30px;
 }
