@@ -37,7 +37,6 @@ if (fightData === null || fightData.length < 2) {
 }
 
 if (localStorage.getItem('leaderboard') !== null) {
-  console.log('Data found');
   leaderboard = JSON.parse(localStorage.getItem('leaderboard'));
 } else {
   new User('WIL','9999');
@@ -141,7 +140,6 @@ function pOneAttHandler() {
   var randomAttack = 0;
   randomAttack = Math.floor(Math.random() * (playerOne.maxAtt - playerOne.minAtt + 1) + playerOne.minAtt);
   score = score + randomAttack;
-  console.log(randomAttack);
   playerTwo.health = playerTwo.health - randomAttack;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   attackSound();
@@ -176,7 +174,6 @@ function pTwoAttHandler() {
   var randomAttack = 0;
   randomAttack = Math.floor(Math.random() * (playerTwo.maxAtt - playerTwo.minAtt + 1) + playerTwo.minAtt);
   score = score + randomAttack;
-  console.log(randomAttack);
   playerOne.health = playerOne.health - randomAttack;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   attackSound();
