@@ -20,20 +20,21 @@ var playerOneAnimations = document.getElementById('playerOneAnimations');
 var playerTwoAnimations = document.getElementById('playerTwoAnimations');
 var playerOneContext = playerOneAnimations.getContext('2d');
 var playerTwoContext = playerTwoAnimations.getContext('2d');
-playerOneContext.imageSmoothingEnabled = false;
-playerTwoContext.imageSmoothingEnabled = false;
 var myHealSpriteSheet = document.getElementById('healSprite');
 var myScratchSpriteSheet = document.getElementById('scratchSprite');
-myScratchSpriteSheet.style.visibility = 'hidden';
-myHealSpriteSheet.style.visibility = 'hidden';
 var interval;
 var arrayOfFunctions = [
   pOneTurn,
   pTwoTurn
 ];
 var playerOneBool = false;
-//Making the game over screen invisible
+
+//Making the game over screen invisible, sprite sheets invisible, disabling image smoothing
 endScreen.style.visibility = 'hidden';
+myScratchSpriteSheet.style.visibility = 'hidden';
+myHealSpriteSheet.style.visibility = 'hidden';
+playerOneContext.imageSmoothingEnabled = false;
+playerTwoContext.imageSmoothingEnabled = false;
 
 //Starting on player one's turn
 arrayOfFunctions[Math.floor(Math.random() * arrayOfFunctions.length)]();
@@ -60,8 +61,8 @@ if (localStorage.getItem('leaderboard') !== null) {
   new User('BBB', '7');
 }
 
-//Character and User constructor functions
-function Fighter(name, filepath) {
+//Character, User, and Sprite constructor functions
+function Fighter(name, filepath, minAtt, maxAtt, minDef, maxDef) {
   this.name = name;
   this.filepath = filepath;
   this.health = 100;
@@ -112,21 +113,27 @@ Sprite.prototype.update = function(x, y){
     );
   }
 };
+
 function User(username, score) {
   this.username = username;
   this.score = score;
   leaderboard.push(this);
 }
+
+//Functions and variables for the actual animations
 var healthAnimation = new Sprite({
   image: myHealSpriteSheet,
   frames: 5,
   ticksPerFrame: 10
 });
+
 var clawAnimation = new Sprite({
   image: myScratchSpriteSheet,
   frames: 4,
   ticksPerFrame: 10
 });
+
+//Drawing the scratch animation
 function clawRender(){
   if(playerOneBool === true){
     if(clawAnimation.frameIndex === clawAnimation.frames){
@@ -150,6 +157,8 @@ function clawRender(){
     }
   }
 }
+
+//Drawing the heal animation
 function healRender (){
   if(playerOneBool === true){
     if(healthAnimation.frameIndex === healthAnimation.frames){
@@ -175,6 +184,7 @@ function healRender (){
     }
   }
 }
+
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
 new Fighter('Grumpy-Cat', 'images/grumpy.jpg');
