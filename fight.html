@@ -27,7 +27,22 @@
     <source src="sound/guile.mp3" />
   </audio>
   <a href="#noscroll" id="mute">Toggle Audio</a>
+
   <section id="arena">
+
+    <section id="endScreen">
+      <h1>Game Over!</h1>
+      <h2 id="congratulations"></h2>
+      <form id="userForm">
+        <fieldset>
+          <legend>Enter your username!</legend>
+          <label for="enterUser">Username:</label>
+          <input id="submitUser" name="submitUser" type="text" maxlength="3" />
+          <button id="saveGame" type="submit">Save</button>
+        </fieldset>
+      </form>
+    </section>
+
   <section id="playerOneSec" class="fighter">
     <ul>
       <li id="playerOneName"></li>
@@ -54,17 +69,6 @@
   </section>
 </section>
 
-  <section id="endScreen">
-    <h1>Game Over!</h1>
-    <h2 id="congratulations"></h2>
-    <form id="userForm">
-      <fieldset>
-        <legend>Enter your username!</legend>
-        <label for="enterUser">Username:</label>
-        <input id="submitUser" name="submitUser" type="text" maxlength="3" />
-        <button id="saveGame" type="submit">Save</button>
-      </fieldset>
-    </form>
     <audio id="attack" src="sound/scratch.wav"></audio>
     <audio id="heal" src="sound/heal.wav"></audio>
     <audio id="battle" src="sound/battle.ogg"></audio>

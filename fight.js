@@ -23,12 +23,15 @@ var mySpriteSheet = document.getElementById('healSprite');
 var interval;
 var x;
 var y;
-
+var arrayOfFunctions = [
+  pOneTurn,
+  pTwoTurn
+];
 //Making the game over screen invisible
 endScreen.style.visibility = 'hidden';
 
 //Starting on player one's turn
-pOneTurn();
+arrayOfFunctions[Math.floor(Math.random() * arrayOfFunctions.length)]();
 battleSound();
 
 //Loading fight data from local storage
@@ -114,12 +117,12 @@ function render (){
 }
 //All characters being instanced
 new Fighter('Cute-Cat', 'images/kitty1.jpg');
-new Fighter('Grumpy-Cat', 'images/GrumpyCat.jpg');
-new Fighter('Spookie','images/spookie.jpg');
+new Fighter('Grumpy-Cat', 'images/grumpy.jpg');
+new Fighter('Spookie','images/wizard.jpg');
 new Fighter('Nova','images/nova.jpg');
 new Fighter('Gary', 'images/gary.jpg');
 new Fighter('Charlotte', 'images/charlotte.jpg');
-new Fighter('Demi', 'images/demi.png');
+new Fighter('Demi', 'images/demi.jpg');
 
 //Assigning characters to players
 for (var i in allCats){
@@ -264,7 +267,7 @@ document.getElementById('mute').addEventListener('click', function (e)
 //Event Handler for leaderboard data and moving to leaderboard.html
 function leaderboardHandler (event) {
   event.preventDefault();
-  var user = event.target.submitUser.value;
+  var user = event.target.submitUser.value.toUpperCase();
   new User(user, score);
   localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
   window.location.href = 'leaderboard.html';
