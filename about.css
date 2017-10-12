@@ -21,14 +21,10 @@ img {
 }
 
 /*************About Us styling****************/
-/*#about-h1 {
-  margin-bottom: 100px;
-}*/
 
 #about div{
   width: 400px;
   height: 250px;
-
 }
 
 #about img {
@@ -45,29 +41,20 @@ img {
   float: right;
   margin-right: 20%;
   display: inline-block;
-
 }
 
 #special {
   margin-top: 575px;
 }
 
+#about p {
+  text-align: center;
+}
 /************************************************/
 
 #logo {
   margin-left: 42%;
   padding: 0;
-}
-
-#about ul {
-
-  /*list-style: none;
-  margin-left: 15%;
-  text-align: center;*/
-}
-
-#about p {
-  text-align: center;
 }
 
 /*************************************/
