@@ -16,9 +16,12 @@ var userForm = document.getElementById('userForm');
 var fighterOne = document.getElementById('PlayerOne');
 var fighterTwo = document.getElementById('PlayerTwo');
 var audio = document.getElementById('theme');
-var animation = document.querySelector('canvas');
-var context = animation.getContext('2d');
-context.imageSmoothingEnabled = false;
+var playerOneAnimations = document.getElementById('playerOneAnimations');
+var playerTwoAnimations = document.getElementById('playerTwoAnimations');
+var playerOneContext = playerOneAnimations.getContext('2d');
+var playerTwoContext = playerTwoAnimations.getContext('2d');
+playerOneContext.imageSmoothingEnabled = false;
+playerTwoContext.imageSmoothingEnabled = false;
 var myHealSpriteSheet = document.getElementById('healSprite');
 var myScratchSpriteSheet = document.getElementById('scratchSprite');
 myScratchSpriteSheet.style.visibility = 'hidden';
@@ -30,6 +33,7 @@ var arrayOfFunctions = [
   pOneTurn,
   pTwoTurn
 ];
+var playerOneBool = false;
 //Making the game over screen invisible
 endScreen.style.visibility = 'hidden';
 
@@ -77,7 +81,6 @@ function Sprite(model){
   this.tickCount = 0;
 }
 Sprite.prototype.update = function(x, y){
-  console.log(this.frameIndex);
   this.tickCount += 1;
   if(this.tickCount > this.ticksPerFrame){
     this.tickCount = 0;
@@ -85,17 +88,31 @@ Sprite.prototype.update = function(x, y){
       this.frames += 1;
     }
   }
-  context.drawImage(
-    this.image,
-    0,
-    this.frameIndex * this.frameH,
-    this.width,
-    this.frameH,
-    x,
-    y,
-    this.width,
-    this.frameH
-  );
+  if(playerOneBool === true){
+    playerOneContext.drawImage(
+      this.image,
+      0,
+      this.frameIndex * this.frameH,
+      this.width,
+      this.frameH,
+      x,
+      y,
+      this.width,
+      this.frameH
+    );
+  }else{
+    playerTwoContext.drawImage(
+      this.image,
+      0,
+      this.frameIndex * this.frameH,
+      this.width,
+      this.frameH,
+      x,
+      y,
+      this.width,
+      this.frameH
+    );
+  }
 };
 function User(username, score) {
   this.username = username;
@@ -112,28 +129,50 @@ var clawAnimation = new Sprite({
   frames: 4,
   ticksPerFrame: 10
 });
-console.log(clawAnimation);
 function clawRender(){
-  console.log(clawAnimation.frameIndex);
-  if(clawAnimation.frameIndex === clawAnimation.frames){
-    context.clearRect(0, 0, 32, 160);
-    clawAnimation.frameIndex = 0;
-    clearInterval(interval);
+  if(playerOneBool === true){
+    if(clawAnimation.frameIndex === clawAnimation.frames){
+      playerOneContext.clearRect(0, 0, 32, 160);
+      clawAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerOneContext.clearRect(0, 0, 32, 160);
+      clawAnimation.update(0,0);
+      clawAnimation.frameIndex++;
+    }
   }else{
-    context.clearRect(0, 0, 32, 160);
-    clawAnimation.update(0,0);
-    clawAnimation.frameIndex++;
+    if(clawAnimation.frameIndex === clawAnimation.frames){
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      clawAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      clawAnimation.update(0,0);
+      clawAnimation.frameIndex++;
+    }
   }
 }
 function healRender (){
-  if(healthAnimation.frameIndex === healthAnimation.frames){
-    context.clearRect(0, 0, 32, 160);
-    healthAnimation.frameIndex = 0;
-    clearInterval(interval);
+  if(playerOneBool === true){
+    if(healthAnimation.frameIndex === healthAnimation.frames){
+      playerOneContext.clearRect(0, 0, 32, 160);
+      healthAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      healthAnimation.update(0, 0);
+      healthAnimation.frameIndex++;
+    }
   }else{
-    context.clearRect(0, 0, 32, 160);
-    healthAnimation.update(0, 0);
-    healthAnimation.frameIndex++;
+    if(healthAnimation.frameIndex === healthAnimation.frames){
+      playerTwoContext.clearRect(0, 0, 32, 160);
+      healthAnimation.frameIndex = 0;
+      clearInterval(interval);
+    }else{
+      playerOneContext.clearRect(0, 0, 32, 160);
+      healthAnimation.update(0, 0);
+      healthAnimation.frameIndex++;
+    }
   }
 }
 //All characters being instanced
@@ -209,6 +248,7 @@ function battleSound () {
 
 function pOneAttHandler() {
   var randomAttack = 0;
+  playerOneBool = false;
   randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
   playerTwo.health = playerTwo.health - randomAttack;
@@ -222,6 +262,7 @@ function pOneAttHandler() {
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
+    interval = setInterval(clawRender, 250);
     document.getElementById('congratulations').innerHTML = 'Player One wins!';
     gameOver();
   } else {
@@ -236,15 +277,16 @@ function pOneDefHandler() {
   playerOne.health = playerOne.health + randomHeal;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   healSound();
+  playerOneBool = true;
   interval = setInterval(healRender, 200);
   pTwoTurn();
 }
 
 function pTwoAttHandler() {
   var randomAttack = 0;
+  playerOneBool = true;
   randomAttack = Math.floor(Math.random() * (50 - 20 + 1) + 20);
   score = score + randomAttack;
-  console.log(randomAttack);
   playerOne.health = playerOne.health - randomAttack;
   document.getElementById('playerOneHP').setAttribute('value', playerOne.health);
   attackSound();
@@ -259,6 +301,7 @@ function pTwoAttHandler() {
     pOneDef.style.visibility = 'hidden';
     pTwoAtt.style.visibility = 'hidden';
     pTwoDef.style.visibility = 'hidden';
+    interval = setInterval(clawRender, 250);
     document.getElementById('congratulations').innerHTML = 'Player Two wins!';
     gameOver();
   } else {
@@ -274,6 +317,7 @@ function pTwoDefHandler() {
   playerTwo.health = playerTwo.health + randomHeal;
   document.getElementById('playerTwoHP').setAttribute('value', playerTwo.health);
   healSound();
+  playerOneBool = false;
   interval = setInterval(healRender, 200);
   pOneTurn();
 }
