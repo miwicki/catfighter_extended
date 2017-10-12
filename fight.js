@@ -18,7 +18,7 @@ var fighterTwo = document.getElementById('PlayerTwo');
 var audio = document.getElementById('theme');
 
 //Making the game over screen invisible
-endScreen.style.visibility = 'hidden';
+// endScreen.style.visibility = 'hidden';
 
 //Starting on player one's turn
 pOneTurn();
@@ -209,7 +209,7 @@ document.getElementById('mute').addEventListener('click', function (e)
 //Event Handler for leaderboard data and moving to leaderboard.html
 function leaderboardHandler (event) {
   event.preventDefault();
-  var user = event.target.submitUser.value;
+  var user = event.target.submitUser.value.toUpperCase();
   new User(user, score);
   localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
   window.location.href = 'leaderboard.html';
